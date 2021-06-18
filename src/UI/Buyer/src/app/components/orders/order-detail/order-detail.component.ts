@@ -143,7 +143,7 @@ export class OCMOrderDetails implements OnInit {
   }
 
   async addToCart(): Promise<void> {
-    let validLineItems: LineItem[]
+    let validLineItems: HSLineItem[]
 
     if (isQuoteOrder(this.order)) {
       const orderDetails = await this.context.orderHistory.getOrderDetails(this.order.ID)
@@ -155,8 +155,8 @@ export class OCMOrderDetails implements OnInit {
     await this.context.order.cart.AddValidLineItemsToCart(validLineItems as any)
   }
 
-  validateLineItems(orderDetails: OrderDetails): LineItem[] {
-    let response: LineItem[] = []
+  validateLineItems(orderDetails: OrderDetails): HSLineItem[] {
+    let response: HSLineItem[] = []
 
     this.reorderResponse.ValidLi.forEach(validLi => {
       var orderLineItem = orderDetails.LineItems.find(li => li.ID === validLi.ID)
@@ -182,16 +182,5 @@ export class OCMOrderDetails implements OnInit {
 
   protected createAndSavePDF(): void {
     this.context.pdfService.createAndSavePDF(this.order.ID)
-  }
-
-  async validateLineItemPricing(updatedLineItem: LineItem, matchingLineItem: LineItem) {
-    //if (updatedLineItem.UnitPrice === matchingLineItem.UnitPrice) { return; }
-    //Prices are different, so patch line item to new price.
-    this.reorderResponse.ValidLi.forEach(li => {
-      if (li.ID === updatedLineItem.ID) {
-        li.UnitPrice = updatedLineItem.UnitPrice;
-      }
-    })
-    matchingLineItem.UnitPrice = updatedLineItem.UnitPrice;
   }
 }

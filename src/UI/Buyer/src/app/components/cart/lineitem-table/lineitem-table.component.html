@@ -86,7 +86,7 @@
                     getReturnReason(li.xp?.LineItemReturnInfo?.ReturnReason)
                     }}</span>
                 </small>
-                <a *ngIf="li.Product.xp.ArtworkRequired" href="{{ li.xp.PrintArtworkURL }}" target="_blank">Download
+                <a *ngIf="li.Product.xp.ArtworkRequired" href="{{ li.xp?.PrintArtworkURL }}" target="_blank">Download
                   PDF</a>
                 <small *ngIf="li.xp?.LineItemReturnInfo?.Comment">
                   <span translate>CART.LINEITEM_TABLE.SELLER_COMMENT</span>:
