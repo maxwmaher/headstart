@@ -146,11 +146,12 @@ export class CartService {
       lineToUpdate.xp.SupplierComments = comments
 
       // only include properties seller can edit (exclude private addresses)
-      const { ProductID, Specs, Quantity, xp } = lineToUpdate
+      const { ProductID, Specs, Quantity, xp, UnitPrice } = lineToUpdate
       return await this.upsertLineItem({
         ProductID,
         Specs,
         Quantity,
+        UnitPrice,
         xp,
       })
     } finally {
@@ -165,6 +166,7 @@ export class CartService {
       ProductID: li.Product.ID,
       Quantity: li.Quantity,
       Specs: li.Specs,
+      UnitPrice: li.UnitPrice,
       xp: {
         ImageUrl: li.xp?.ImageUrl,
       },

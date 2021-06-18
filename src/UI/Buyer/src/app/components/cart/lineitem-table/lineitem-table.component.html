@@ -97,7 +97,7 @@
 
                 <div *ngIf="readOnly && !hideStatus">
                   <span translate>ORDERS.DETAIL.STATUS</span>:
-                  <span *ngFor="let entry of li.xp.StatusByQuantity | keyvalue">
+                  <span *ngFor="let entry of li?.xp?.StatusByQuantity | keyvalue">
                     <span *ngIf="entry.value">
                       <ocm-order-status-icon [status]="entry.key"></ocm-order-status-icon>
                       <span>
