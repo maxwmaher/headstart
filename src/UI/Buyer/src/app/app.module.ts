@@ -198,7 +198,8 @@ import { BaseResolveService } from './services/base-resolve/base-resolve.service
 import { ShipMethodNameMapperPipe } from './pipes/ship-method-name/ship-method-name.pipe'
 import { library } from '@fortawesome/fontawesome-svg-core'
 import { faCcAmex, faCcDiscover, faCcMastercard, faCcVisa } from '@fortawesome/free-brands-svg-icons'
-import { faCreditCard } from '@fortawesome/free-solid-svg-icons'
+import { faCreditCard } from '@fortawesome/free-solid-svg-icons';
+import { ShoppingListsComponent } from './components/profile/shopping-lists/shopping-lists.component'
 
 export function HttpLoaderFactory(
   http: HttpClient,
@@ -331,6 +332,7 @@ const components = [
     UnitOfMeasurePipe,
     SafeHTMLPipe,
     ...components,
+    ShoppingListsComponent,
   ],
   imports: [
     BrowserModule,

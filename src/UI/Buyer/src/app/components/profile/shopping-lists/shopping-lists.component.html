@@ -1,0 +1,29 @@
+<section class="container mt-3">
+  <div class="row">
+    <ocm-profile-nav class="col-md-3"></ocm-profile-nav>
+    <div class="col-md-9" *ngIf="!isLoading">
+      <h1 class="page-heading mt-0">Shopping Lists</h1>
+      <div class="row mt-3">
+        <div class="col">
+          <ul class="list-group mt-4">
+            <a
+              *ngFor="let list of shoppingLists?.Items"
+              [routerLink]="['/profile']"
+              class="
+                list-group-item list-group-item-action
+                d-flex
+                justify-content-between
+                align-items-center
+              "
+            >
+              {{ list?.xp?.ShoppingListName }}
+              <span class="badge badge-primary badge-pill">{{
+                list.LineItemCount
+              }}</span>
+            </a>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

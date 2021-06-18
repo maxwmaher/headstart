@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core'
 import { RouterModule, Routes } from '@angular/router'
+import { ShoppingListsComponent } from './components/profile/shopping-lists/shopping-lists.component'
 import { HasTokenGuard } from './interceptors/has-token/has-token.guard'
 import { IsProfiledUserGuard } from './interceptors/is-profiled-user/is-profiled-user.guard'
 import { BaseResolve } from './resolves/base.resolve'
@@ -92,21 +93,42 @@ const HeadstartRoutes: Routes = [
             },
           },
           { path: 'payment-methods', component: PaymentListWrapperComponent },
+          { path: 'shopping-lists', component: ShoppingListsComponent },
         ],
       },
       {
         path: 'orders',
         children: [
-          { path: 'approve/:orderID', component: OrderDetailWrapperComponent, canActivate: [IsProfiledUserGuard] },
-          { path: 'approve', component: OrderHistoryWrapperComponent, canActivate: [IsProfiledUserGuard] },
+          {
+            path: 'approve/:orderID',
+            component: OrderDetailWrapperComponent,
+            canActivate: [IsProfiledUserGuard],
+          },
+          {
+            path: 'approve',
+            component: OrderHistoryWrapperComponent,
+            canActivate: [IsProfiledUserGuard],
+          },
           {
             path: 'location/:locationFilter',
             component: OrderDetailWrapperComponent,
-            canActivate: [IsProfiledUserGuard]
+            canActivate: [IsProfiledUserGuard],
           },
-          { path: 'location', component: OrderHistoryWrapperComponent, canActivate: [IsProfiledUserGuard] },
-          { path: ':orderID', component: OrderDetailWrapperComponent, canActivate: [HasTokenGuard] },
-          { path: '', component: OrderHistoryWrapperComponent, canActivate: [IsProfiledUserGuard] },
+          {
+            path: 'location',
+            component: OrderHistoryWrapperComponent,
+            canActivate: [IsProfiledUserGuard],
+          },
+          {
+            path: ':orderID',
+            component: OrderDetailWrapperComponent,
+            canActivate: [HasTokenGuard],
+          },
+          {
+            path: '',
+            component: OrderHistoryWrapperComponent,
+            canActivate: [IsProfiledUserGuard],
+          },
         ],
       },
     ],
@@ -114,7 +136,9 @@ const HeadstartRoutes: Routes = [
 ]
 
 @NgModule({
-  imports: [RouterModule.forRoot(HeadstartRoutes, { relativeLinkResolution: 'legacy' })],
+  imports: [
+    RouterModule.forRoot(HeadstartRoutes, { relativeLinkResolution: 'legacy' }),
+  ],
   exports: [RouterModule],
 })
-export class AppRoutingModule { }
+export class AppRoutingModule {}

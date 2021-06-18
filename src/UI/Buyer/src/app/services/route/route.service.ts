@@ -110,7 +110,11 @@ export class RouteService {
   }
 
   toMyProfile(): void {
-    this.router.navigateByUrl('/profile')
+    void this.router.navigateByUrl('/profile')
+  }
+
+  toMyShoppingLists(): void {
+    this.toRoute('/profile/shopping-lists')
   }
 
   toMyAddresses(): void {
