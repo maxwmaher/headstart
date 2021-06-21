@@ -1,18 +1,18 @@
 {
   "hostedApp": true,
-  "appname": "HeadstartDemo",
-  "appID": "my-seller-id",
-  "clientID": "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
-  "incrementorPrefix": "HS_TEST",
-  "baseUrl": "https://my-middleware-test.azurewebsites.net/",
-  "middlewareUrl": "https://my-middleware-test.azurewebsites.net",
+  "appname": "Hempel",
+  "appID": "headstartdemo-test",
+  "clientID": "CD256DC8-B6A7-427F-9D47-3DB4E32D9E7B",
+  "incrementorPrefix": "HMP",
+  "baseUrl": "https://headstartdemo-buyer-ui-hempel.azurewebsites.net/",
+  "middlewareUrl": "https://headstartdemo-middleware-hempel.azurewebsites.net",
+  "cmsUrl": "https://ordercloud-cms-test.azurewebsites.net",
   "creditCardIframeUrl": "https://fts-uat.cardconnect.com/itoke/ajax-tokenizer.html",
-  "translateBlobUrl": "https://headstartdemo.blob.core.windows.net/ngx-translate/i18n/",
-  "sellerID": "HEADSTARTDEMO_TEST",
-  "sellerName": "Headstart Demo Seller",
+  "translateBlobUrl": "https://hempeldemo.blob.core.windows.net/ngx-translate/i18n/",
+  "sellerID": "hempeldemo",
+  "sellerName": "Hempel Seller",
   "orderCloudApiUrl": "https://sandboxapi.ordercloud.io",
-  "theme": {
-    "logoSrc": "assets/generic-logo.png"
-  },
-  "instrumentationKey": null
+  "theme": { "logoSrc": "assets/generic-logo.png" },
+  "instrumentationKey": null,
+  "anonymousShoppingEnabled": false
 }

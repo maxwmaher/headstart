@@ -56,7 +56,7 @@ export class OCMQuantityInput implements OnInit, OnChanges {
     const routeUrl = this.router.routerState.snapshot.url
     const splitUrl = routeUrl.split('/')
     const endUrl = splitUrl[splitUrl.length - 1]
-    if (endUrl.includes('cart')) {
+    if (endUrl.includes('cart') || routeUrl.includes('shopping-list')) {
       this.form = new FormGroup({
         quantity: new FormControl(1, {
           validators: Validators.required,

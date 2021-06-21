@@ -1,0 +1,65 @@
+<div>
+  <select
+    *ngIf="shoppingLists?.Items"
+    class="custom-select"
+    aria-label="Select shopping list to add product to"
+    name="shoppinglistselect"
+    id="shoppinglistselect"
+    (change)="listSelected($event.target.value)"
+  >
+    <option [ngValue]="null" [disabled]="true">Add to shopping list</option>
+    <option *ngFor="let list of shoppingLists.Items" [value]="list.ID">
+      {{ list?.xp?.ShoppingListName }}
+    </option>
+    <option value="CREATE_NEW_SHOPPING_LIST">Create new shopping list</option>
+  </select>
+  <ocm-modal [state]="shoppingListModal">
+    <div class="text-center">
+      <h4 class="font-weight-bold mb-3" *ngIf="!alreadyAddedToList">
+        Product was added to list
+      </h4>
+      <h4 class="font-weight-bold mb-3" *ngIf="alreadyAddedToList">
+        Product was already added to your list
+      </h4>
+      <div class="d-flex align-items-baseline mt-3">
+        <button
+          (click)="viewShoppingList()"
+          class="btn btn-secondary btn-block m-1"
+        >
+          View Items
+        </button>
+        <button
+          (click)="dismissShoppingListModal()"
+          class="btn btn-primary btn-block m-1"
+        >
+          Continue Shopping
+        </button>
+      </div>
+    </div>
+  </ocm-modal>
+  <ocm-modal [state]="createShoppingListModal">
+    <div class="text-center">
+      <h4 class="font-weight-bold mb-3">Name your shopping list</h4>
+      <input
+        type="text"
+        class="form-control"
+        [(ngModel)]="newShoppingListName"
+      />
+      <div class="d-flex align-items-baseline mt-3">
+        <button
+          (click)="dismissCreateShoppingListModal()"
+          class="btn btn-secondary btn-block m-1"
+        >
+          Cancel
+        </button>
+        <button
+          [disabled]="!newShoppingListName"
+          (click)="createNewShoppingList()"
+          class="btn btn-primary btn-block m-1"
+        >
+          Submit
+        </button>
+      </div>
+    </div>
+  </ocm-modal>
+</div>

@@ -1,0 +1,67 @@
+<section class="container mt-3">
+  <div class="row">
+    <ocm-profile-nav class="col-md-3"></ocm-profile-nav>
+    <div class="col-md-9" *ngIf="!isLoading">
+      <h1 class="page-heading mt-0 mb-3">Shopping Lists</h1>
+      <div class="row">
+        <div class="col">
+          <ul class="list-group mt-4" *ngIf="shoppingLists?.Items?.length">
+            <a
+              *ngFor="let list of shoppingLists?.Items"
+              routerLink="/profile/shopping-lists/{{ list.ID }}"
+              class="
+                list-group-item list-group-item-action
+                d-flex
+                justify-content-between
+                align-items-center
+              "
+            >
+              {{ list?.xp?.ShoppingListName }}
+              <span class="badge badge-primary badge-pill"
+                >{{ list.LineItemCount }} items</span
+              >
+            </a>
+          </ul>
+          <div
+            class="card bg-light p-3 mx-4 w-100 text-center"
+            *ngIf="!shoppingLists?.Items.length"
+          >
+            <p class="mb-0">
+              It doesn't look like you have any shopping lists.
+              <a
+                href="javascript:void(0);"
+                (click)="openCreateShoppingListModal()"
+                >Create one now</a
+              >
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <ocm-modal [state]="createShoppingListModal">
+    <div class="text-center">
+      <h4 class="font-weight-bold mb-3">Name your shopping list</h4>
+      <input
+        type="text"
+        class="form-control"
+        [(ngModel)]="newShoppingListName"
+      />
+      <div class="d-flex align-items-baseline mt-3">
+        <button
+          (click)="dismissCreateShoppingListModal()"
+          class="btn btn-secondary btn-block m-1"
+        >
+          Cancel
+        </button>
+        <button
+          [disabled]="!newShoppingListName"
+          (click)="createNewShoppingList()"
+          class="btn btn-primary btn-block m-1"
+        >
+          Submit
+        </button>
+      </div>
+    </div>
+  </ocm-modal>
+</section>

@@ -1,4 +1,4 @@
-import { RouteConfig } from "src/app/models/shared.types";
+import { RouteConfig } from 'src/app/models/shared.types'
 
 export const ProfileRoutes: RouteConfig[] = [
   {
@@ -30,5 +30,11 @@ export const ProfileRoutes: RouteConfig[] = [
     displayText: 'Change Password',
     url: '/profile/details',
     showInDropdown: false,
+  },
+  {
+    routerCall: 'toMyShoppingLists',
+    displayText: 'My Shopping Lists',
+    url: '/profile/my-shopping-lists',
+    showInDropdown: true,
   },
 ]
