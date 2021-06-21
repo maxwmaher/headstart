@@ -50,7 +50,6 @@ export class ShoppingListDropdownComponent {
   }
 
   async listSelected(orderID: string): Promise<void> {
-    debugger
     if (!orderID) {
       return
     } else if (orderID === 'CREATE_NEW_SHOPPING_LIST') {
