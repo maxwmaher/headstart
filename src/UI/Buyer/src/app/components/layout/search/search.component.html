@@ -1,32 +1,22 @@
 <form [formGroup]="form" #searchform>
   <div class="form-group mb-0 position-relative">
-      <input
-      type="search"
-      class="form-control"
-      placeholder="{{
-        ('ADMIN.COMMON.SEARCH' | translate) +
+    <input type="search" class="form-control" placeholder="{{
+        placeholderText ? ('ADMIN.COMMON.SEARCH' | translate) +
           ' ' +
           (placeholderText | translate) +
-          '...'
-      }}"
-      aria-labelledby="search-addon"
-      id="search-addon"
-      formControlName="search"
-      (keyup.enter)="search()"
-      autocomplete="off"
-    />
-     <label for="search-addon" class="sr-only">{{
+          '...' : ('ADMIN.COMMON.SEARCH' | translate) + '...'
+      }}" aria-labelledby="search-addon" id="search-addon" formControlName="search" (keyup.enter)="search()"
+      autocomplete="off" />
+    <label for="search-addon" class="sr-only">{{
       placeholderText || 'Search...'
-    }}</label>
-      <button (click)="search()" title="Search"
-              class="btn btn-search btn-search--search">
-              <span class="sr-only">Search Button</span>
-              <fa-icon [icon]="faSearch" aria-hidden="true">
-        </fa-icon>
-      </button>
+      }}</label>
+    <button (click)="search()" title="Search" class="btn btn-search btn-search--search">
+      <span class="sr-only">Search Button</span>
+      <fa-icon [icon]="faSearch" aria-hidden="true">
+      </fa-icon>
+    </button>
     <ng-container *ngIf="showClear()">
-      <button (click)="clear()"
-              class="btn btn-search btn-search--clear">
+      <button (click)="clear()" class="btn btn-search btn-search--clear">
         <fa-icon [icon]="faTimes">
           <span class="sr-only">Clear Your Search Term</span>
         </fa-icon>

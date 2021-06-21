@@ -5,3 +5,49 @@
 // to start you off. want to see the full list of bootstrap variables?
 // check out node_modules/bootstrap/variables.scss
 // --------------------------------------------------------------------------------------
+
+$blue:              #164194;    // Hempel blue
+$teal:              #009FDF;    // Hempel teal
+$purple:            #83167B; 
+$pink:              #e83e8c;
+$red:               #E30613;    // Hempel red
+$orange:            #FE7601;
+$yellow:            #ffc107;
+$cyan:              #94a8cd;
+$green:             #78B700;
+
+$white:             #fff;
+$gray-100:          #F6F6F6;
+$gray-200:          #E8E8E8;
+$gray-300:          #D8D9D9;
+$gray-400:          #C8C9CA;
+$gray-500:          #B1B2B3;
+$gray-600:          #636466;    // iron-gray; 
+$gray-700:          #474849;
+$gray-800:          #353638;
+$gray-900:          #222224;
+$black:             #000;
+
+$primary:            $blue;
+$secondary:          $teal;
+$success:            $green;
+$info:               $cyan;
+$warning:            $yellow;
+$danger:             $red;
+$light:              $gray-200;
+$medium:             $gray-500;
+$dark:               $gray-800;
+
+// .img-thumbnail
+$thumbnail-border-color:      $light;
+$thumbnail-border-width:      .5px;
+$thumbnail-box-shadow:        0 .125rem .25rem rgba($black, .075); // this is $box-shadow-sm
+$thumbnail-border-radius:     unset;
+$thumbnail-padding:           unset;
+
+// Typography
+
+@import '_typography.scss';
+
+$font-family-sans-serif:      -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji" !default;
+$font-family-base:            'Libre Franklin', $font-family-sans-serif;

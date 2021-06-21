@@ -30,6 +30,7 @@ import { flatten as _flatten } from 'lodash'
 import { OrderProgress } from '@app-seller/models/order.types'
 import { AppConfig } from '@app-seller/models/environment.types'
 import { SELLER } from '@app-seller/models/user.types'
+import { FormControl, FormGroup } from '@angular/forms'
 
 export const LineItemTableStatus = {
   Default: 'Default',
@@ -69,6 +70,9 @@ export class OrderDetailsComponent {
     Animated: false,
   }
   orderAvatarInitials: string
+  quoteOrderForm: FormGroup
+  isEditingQuote = false
+  isSavingQuote = false
 
   @Input()
   set order(order: Order) {
@@ -90,6 +94,43 @@ export class OrderDetailsComponent {
   ) {
     this.isSellerUser = this.appAuthService.getOrdercloudUserType() === SELLER
     this.setOrderDirection()
+  }
+
+  setQuoteOrderForm(): void {
+    this.quoteOrderForm = new FormGroup({
+      UnitPrice: new FormControl(this._lineItems[0].UnitPrice),
+      SellerQuoteComment: new FormControl(this._order?.xp?.SellerQuoteComment),
+    })
+  }
+
+  async onSubmit(): Promise<void> {
+    this.isSavingQuote = true
+    const updatedOrder = await this.ocOrderService
+      .Patch('Incoming', this._order.ID, {
+        xp: {
+          NeedsSellerAttention: false,
+          NeedsBuyerAttention: true,
+          SellerQuoteComment: this.quoteOrderForm.value.SellerQuoteComment,
+        },
+      })
+      .toPromise()
+    const updatedLineItem = await this.ocLineItemService
+      .Patch('Incoming', this._order.ID, this._lineItems[0].ID, {
+        UnitPrice: this.quoteOrderForm.value.UnitPrice,
+      })
+      .toPromise()
+    await this.refreshOrder()
+    this.isSavingQuote = false
+    this.isEditingQuote = false
+  }
+
+  toggleEditQuoteOrder(): void {
+    this.setQuoteOrderForm()
+    this.isEditingQuote = !this.isEditingQuote
+  }
+
+  getEditQuoteWording(): string {
+    return this.isEditingQuote ? 'Cancel Quote Edit' : 'Edit Quote'
   }
 
   setOrderProgress(order: HSOrder): void {

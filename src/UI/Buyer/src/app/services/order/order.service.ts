@@ -97,6 +97,9 @@ export class CurrentOrderService {
           Email: info.Email,
           Comments: info.Comments,
         },
+        NeedsSellerAttention: true,
+        NeedsBuyerAttention: false,
+        SellerQuoteComment: null
       },
     }
   }

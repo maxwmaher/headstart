@@ -34,12 +34,12 @@ export class OCMOrderDetails implements OnInit {
   constructor(
     private context: ShopperContextService,
     private modalService: NgbModal
-  ) {}
+  ) { }
 
   async ngOnInit(): Promise<void> {
     this.isAnon = this.context.currentUser.isAnonymous()
     this.approvalVersion =
-    this.context.orderHistory.filters.getOrderViewContext() === OrderViewContext.Approve
+      this.context.orderHistory.filters.getOrderViewContext() === OrderViewContext.Approve
     this.orderDetails = await this.context.orderHistory.getOrderDetails()
     this.order = this.orderDetails.Order
     this.validateReorder(this.order.ID, this.orderDetails.LineItems)
@@ -100,14 +100,14 @@ export class OCMOrderDetails implements OnInit {
 
   toShipments(): void {
     this.subView = 'shipments'
-    if(this.showRequestCancel || this.showRequestReturn) {
+    if (this.showRequestCancel || this.showRequestReturn) {
       this.toggleShowRequestForm(false)
     }
   }
 
   toDetails(): void {
     this.subView = 'details'
-    if(this.showRequestCancel || this.showRequestReturn) {
+    if (this.showRequestCancel || this.showRequestReturn) {
       this.toggleShowRequestForm(false)
     }
   }
@@ -142,7 +142,31 @@ export class OCMOrderDetails implements OnInit {
   }
 
   async addToCart(): Promise<void> {
-    await this.context.order.cart.AddValidLineItemsToCart(this.reorderResponse.ValidLi)
+    let validLineItems: HSLineItem[]
+
+    if (isQuoteOrder(this.order)) {
+      const orderDetails = await this.context.orderHistory.getOrderDetails(this.order.ID)
+
+      validLineItems = this.validateLineItems(orderDetails)
+    } else {
+      validLineItems = this.reorderResponse.ValidLi
+    }
+    await this.context.order.cart.AddValidLineItemsToCart(validLineItems as any)
+  }
+
+  validateLineItems(orderDetails: OrderDetails): HSLineItem[] {
+    let response: HSLineItem[] = []
+
+    this.reorderResponse.ValidLi.forEach(validLi => {
+      var orderLineItem = orderDetails.LineItems.find(li => li.ID === validLi.ID)
+      if (orderLineItem == null) { return }
+      if (orderLineItem.UnitPrice !== validLi.UnitPrice) {
+        validLi.UnitPrice = orderLineItem.UnitPrice
+      }
+      response.push(validLi)
+    });
+    return response
+    //if seller updated pricing, update line items to reflect the new price
   }
 
   async moveOrderToCart(): Promise<void> {

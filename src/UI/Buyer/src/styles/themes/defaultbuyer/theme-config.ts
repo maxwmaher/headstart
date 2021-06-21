@@ -2,7 +2,7 @@ import { Theme } from "src/app/models/environment.types"
 
 
 const headstartdemoTheme: Theme = {
-  logoSrc: `assets/generic-logo.png`,
+  logoSrc: `assets/hempel-logo.png`,
 }
 
 export default headstartdemoTheme

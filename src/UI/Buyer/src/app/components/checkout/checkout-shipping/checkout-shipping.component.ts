@@ -25,8 +25,9 @@ export class OCMCheckoutShipping implements OnInit {
   @Input() set lineItems(value: ListPage<HSLineItem>) {
     this._lineItems = value;
     this.getSupplierData()
-  } 
+  }
   @Input() set shipEstimates(value: ShipEstimate[]) {
+    if (value == null) { return }
     this._shipEstimates = value
     this._areAllShippingSelectionsMade = this.areAllShippingSelectionsMade(
       value
@@ -51,10 +52,10 @@ export class OCMCheckoutShipping implements OnInit {
     this.lineItems = undefined
   }
 
-  ngOnInit(): void {}
+  ngOnInit(): void { }
 
   async getSupplierData(): Promise<void> {
-    if(this._lineItems) {
+    if (this._lineItems) {
       this._supplierData = await this.checkoutService.buildSupplierData(this._lineItems.Items)
     }
   }
@@ -75,6 +76,9 @@ export class OCMCheckoutShipping implements OnInit {
   }
 
   areAllShippingSelectionsMade(shipEstimates: ShipEstimate[]): boolean {
+    if (shipEstimates == null || shipEstimates?.length < 1) {
+      return false;
+    }
     return shipEstimates.every(
       (shipEstimate) => shipEstimate.SelectedShipMethodID
     )
