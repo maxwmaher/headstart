@@ -271,6 +271,17 @@ export class OCMProductDetails implements OnInit {
           this._superProduct.Specs,
           this.specForm
         ),
+        StatusByQuantity: {
+            Submitted: lineItem.Quantity,
+            Backordered: 0,
+            CancelRequested: 0,
+            Complete: 0,
+            ReturnRequested: 0,
+            Returned: 0,
+            Canceled: 0,
+            Open: 0
+        } as any
+        
       }
       this.submittedQuoteOrder = await this.context.order.submitQuoteOrder(
         info,
