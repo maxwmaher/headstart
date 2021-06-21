@@ -1,13 +1,13 @@
 import { HSLineItem } from '@ordercloud/headstart-sdk'
 
 export function NumberCanReturn(lineItem: HSLineItem): number {
-  return lineItem.xp.StatusByQuantity['Complete']
+  return lineItem?.xp?.StatusByQuantity['Complete']
 }
 
 export function NumberCanCancel(lineItem: HSLineItem): number {
   return (
-    lineItem.xp.StatusByQuantity['Submitted'] +
-    lineItem.xp.StatusByQuantity['Backordered']
+    lineItem?.xp?.StatusByQuantity['Submitted'] +
+    lineItem?.xp?.StatusByQuantity['Backordered']
   )
 }
 

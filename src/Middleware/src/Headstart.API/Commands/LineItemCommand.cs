@@ -401,9 +401,12 @@ namespace Headstart.API.Commands
             
             Require.That(!order.IsSubmitted, new ErrorCode("Invalid Order Status", 400, "Order has already been submitted"));
 
-            liReq.xp.StatusByQuantity = LineItemStatusConstants.EmptyStatuses;
-            liReq.xp.StatusByQuantity[LineItemStatus.Open] = liReq.Quantity;
-
+            if (liReq.xp != null)
+            {
+                liReq.xp.StatusByQuantity = LineItemStatusConstants.EmptyStatuses;
+                liReq.xp.StatusByQuantity[LineItemStatus.Open] = liReq.Quantity;
+            }
+   
             var preExistingLi = ((List<HSLineItem>)existingLineItems).Find(eli => LineItemsMatch(eli, liReq));
             if (preExistingLi != null)
             {
@@ -463,6 +466,10 @@ namespace Headstart.API.Commands
                 decimal lineItemTotal = 0;
                 if (li != null)
                 {
+                    if (product.Product.xp.ProductType == ProductType.Quote && li?.UnitPrice != null)
+                    {
+                        return (decimal)li.UnitPrice;
+                    }
                     // Determine price including quantity price break discount
                     decimal priceBasedOnQuantity = product.PriceSchedule.PriceBreaks.Last(priceBreak => priceBreak.Quantity <= li.Quantity).Price;
                     // Determine markup for the 1 line item

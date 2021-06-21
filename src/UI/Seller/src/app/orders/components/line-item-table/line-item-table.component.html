@@ -76,7 +76,7 @@
                   <small class="text-muted d-block">{{
                     li.Variant?.ID || li.Product.ID
                     }}</small>
-                  <a *ngIf="li.Product.xp.ArtworkRequired" href="{{ li.xp.PrintArtworkURL }}" target="_blank">Download
+                  <a *ngIf="li.Product.xp.ArtworkRequired" href="{{ li.xp?.PrintArtworkURL }}" target="_blank">Download
                     PDF</a>
                   <p class="mb-0 mt-2" *ngFor="let spec of getVariableTextSpecs(li)">
                     {{ spec?.Name }}: {{ spec.Value }}

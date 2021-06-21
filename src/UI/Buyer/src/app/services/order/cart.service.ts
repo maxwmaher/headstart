@@ -76,7 +76,7 @@ export class CartService {
     // order is well defined, line item can be added
     this.onAdd.next(lineItem)
     if (!_isUndefined(this.order.DateCreated)) {
-      const isPrintProduct = lineItem.xp.PrintArtworkURL
+      const isPrintProduct = lineItem.xp?.PrintArtworkURL
       // Handle quantity changes for non-print products
       if (!isPrintProduct) {
         const lineItems = this.state.lineItems.Items
@@ -146,11 +146,12 @@ export class CartService {
       lineToUpdate.xp.SupplierComments = comments
 
       // only include properties seller can edit (exclude private addresses)
-      const { ProductID, Specs, Quantity, xp } = lineToUpdate
+      const { ProductID, Specs, Quantity, xp, UnitPrice } = lineToUpdate
       return await this.upsertLineItem({
         ProductID,
         Specs,
         Quantity,
+        UnitPrice,
         xp,
       })
     } finally {
@@ -165,6 +166,7 @@ export class CartService {
       ProductID: li.Product.ID,
       Quantity: li.Quantity,
       Specs: li.Specs,
+      UnitPrice: li.UnitPrice,
       xp: {
         ImageUrl: li.xp?.ImageUrl,
       },
