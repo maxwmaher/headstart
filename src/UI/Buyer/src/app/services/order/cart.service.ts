@@ -127,11 +127,16 @@ export class CartService {
     return Promise.all(req)
   }
 
-  async setQuantity(lineItem: HSLineItem): Promise<HSLineItem> {
+  async setQuantity(
+    lineItem: HSLineItem,
+    overrideOrderID?: string // specify an alternative order to update (not current cart)
+  ): Promise<HSLineItem> {
     try {
-      return await this.upsertLineItem(lineItem)
+      return await this.upsertLineItem(lineItem, overrideOrderID)
     } finally {
-      await this.state.reset()
+      if (!overrideOrderID) {
+        await this.state.reset()
+      }
     }
   }
 
@@ -258,18 +263,27 @@ export class CartService {
     }
   }
 
-  private async upsertLineItem(lineItem: HSLineItem): Promise<HSLineItem> {
+  private async upsertLineItem(
+    lineItem: HSLineItem,
+    overrideOrderID?: string // specify an alternative order to update (not current cart)
+  ): Promise<HSLineItem> {
     this.isCartValidSubject.next(false)
     try {
-      return await HeadStartSDK.Orders.UpsertLineItem(this.order?.ID, lineItem)
+      return await HeadStartSDK.Orders.UpsertLineItem(
+        overrideOrderID || this.order?.ID,
+        lineItem
+      )
     } finally {
-      if (this.state.orderPromos?.Items?.length) {
-        // if there are pre-existing promos need to recalculate order
-        const updatedOrder = await this.checkout.calculateOrder()
-        await this.state.resetCurrentOrder(updatedOrder)
+      // only update state if updating current order, not on overrides
+      if (!overrideOrderID) {
+        if (this.state.orderPromos?.Items?.length) {
+          // if there are pre-existing promos need to recalculate order
+          const updatedOrder = await this.checkout.calculateOrder()
+          await this.state.resetCurrentOrder(updatedOrder)
+        }
+        await this.state.resetCurrentOrder()
+        this.isCartValidSubject.next(true)
       }
-      await this.state.resetCurrentOrder()
-      this.isCartValidSubject.next(true)
     }
   }
 

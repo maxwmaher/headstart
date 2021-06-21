@@ -1,0 +1,50 @@
+<section class="container mt-3">
+  <div class="row">
+    <ocm-profile-nav class="col-md-3"></ocm-profile-nav>
+    <div class="col-md-9" *ngIf="order">
+      <div
+        class="
+          d-flex
+          align-items-center
+          justify-content-between
+          border-bottom
+          pb-2
+          mb-4
+        "
+      >
+        <h1 class="page-heading mt-0 mb-3" *ngIf="order?.xp?.ShoppingListName">
+          <input
+            type="text"
+            [(ngModel)]="order.xp.ShoppingListName"
+            (ngModelChange)="onShoppingListNameChange($event)"
+          />
+        </h1>
+        <button
+          (click)="deleteShoppingList()"
+          class="btn btn-sm btn-outline-danger"
+          translate
+        >
+          <fa-icon [icon]="faTrashAlt"></fa-icon> Delete
+        </button>
+      </div>
+
+      <div class="row">
+        <ocm-lineitem-table
+          *ngIf="lineItems?.Items?.length"
+          [lineItems]="lineItems.Items"
+          [readOnly]="false"
+          [orderID]="order.ID"
+        >
+        </ocm-lineitem-table>
+        <div
+          class="card bg-light p-3 mx-4 w-100 text-center"
+          *ngIf="!lineItems?.Items?.length && !isLoading"
+        >
+          <p class="mb-0">
+            Doesn't look like you have any products added to your shopping list
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core'
 import { RouterModule, Routes } from '@angular/router'
+import { ShoppingListDetailComponent } from './components/profile/shopping-list-detail/shopping-list-detail.component'
 import { ShoppingListsComponent } from './components/profile/shopping-lists/shopping-lists.component'
 import { HasTokenGuard } from './interceptors/has-token/has-token.guard'
 import { IsProfiledUserGuard } from './interceptors/is-profiled-user/is-profiled-user.guard'
@@ -94,6 +95,10 @@ const HeadstartRoutes: Routes = [
           },
           { path: 'payment-methods', component: PaymentListWrapperComponent },
           { path: 'shopping-lists', component: ShoppingListsComponent },
+          {
+            path: 'shopping-lists/:orderID',
+            component: ShoppingListDetailComponent,
+          },
         ],
       },
       {

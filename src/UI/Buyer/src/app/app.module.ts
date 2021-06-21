@@ -199,7 +199,8 @@ import { ShipMethodNameMapperPipe } from './pipes/ship-method-name/ship-method-n
 import { library } from '@fortawesome/fontawesome-svg-core'
 import { faCcAmex, faCcDiscover, faCcMastercard, faCcVisa } from '@fortawesome/free-brands-svg-icons'
 import { faCreditCard } from '@fortawesome/free-solid-svg-icons';
-import { ShoppingListsComponent } from './components/profile/shopping-lists/shopping-lists.component'
+import { ShoppingListsComponent } from './components/profile/shopping-lists/shopping-lists.component';
+import { ShoppingListDetailComponent } from './components/profile/shopping-list-detail/shopping-list-detail.component'
 
 export function HttpLoaderFactory(
   http: HttpClient,
@@ -333,6 +334,7 @@ const components = [
     SafeHTMLPipe,
     ...components,
     ShoppingListsComponent,
+    ShoppingListDetailComponent,
   ],
   imports: [
     BrowserModule,

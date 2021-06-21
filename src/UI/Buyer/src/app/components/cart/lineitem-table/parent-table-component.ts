@@ -25,6 +25,7 @@ export abstract class OCMParentTableComponent implements OnInit {
   @Input() hideStatus = false
   @Input() displayShippingInfo = false
   @Input() invalidItem
+  @Input() orderID: string
   closeIcon = faTimes
   faTrashAlt = faTrashAlt
   _supplierArray: any[]
@@ -144,12 +145,15 @@ export abstract class OCMParentTableComponent implements OnInit {
       try {
         // ACTIVATE SPINNER/DISABLE INPUT IF QTY BEING UPDATED
         this.updatingLiIDs.push(lineItemID)
-        await this.context.order.cart.setQuantity({
-          ProductID,
-          Specs,
-          Quantity,
-          xp,
-        })
+        await this.context.order.cart.setQuantity(
+          {
+            ProductID,
+            Specs,
+            Quantity,
+            xp,
+          },
+          this.orderID
+        )
       } finally {
         // REMOVE SPINNER/ENABLE INPUT IF QTY NO LONGER BEING UPDATED
         this.updatingLiIDs.splice(this.updatingLiIDs.indexOf(lineItemID), 1)
