@@ -72,9 +72,15 @@ export class CartService {
   }
 
   // TODO - get rid of the progress spinner for all Cart functions. Just makes it look slower.
-  async add(lineItem: HSLineItem): Promise<HSLineItem> {
+  async add(
+    lineItem: HSLineItem,
+    overrideOrderID?: string
+  ): Promise<HSLineItem> {
     // order is well defined, line item can be added
-    this.onAdd.next(lineItem)
+    if (!overrideOrderID) {
+      this.onAdd.next(lineItem)
+    }
+
     if (!_isUndefined(this.order.DateCreated)) {
       const isPrintProduct = lineItem.xp.PrintArtworkURL
       // Handle quantity changes for non-print products
@@ -89,9 +95,9 @@ export class CartService {
           lineItem.Quantity += lineItemWithMatchingSpecs.Quantity
         }
       }
-      return await this.upsertLineItem(lineItem)
+      return await this.upsertLineItem(lineItem, overrideOrderID)
     }
-    if (!this.initializingOrder) {
+    if (!this.initializingOrder && !overrideOrderID) {
       await this.initializeOrder()
       return await this.upsertLineItem(lineItem)
     }

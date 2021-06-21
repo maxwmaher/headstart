@@ -137,6 +137,12 @@
               {{ price | currency: userCurrency }}
             </button>
           </div>
+          <app-shopping-list-dropdown
+            [specs]="specs"
+            [specForm]="specForm"
+            [superProduct]="_superProduct"
+          >
+          </app-shopping-list-dropdown>
         </div>
         <div *ngIf="!isOrderable" class="alert alert-info" translate>
           PRODUCTS.DETAILS.VIEW_ONLY
