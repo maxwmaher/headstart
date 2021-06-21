@@ -466,7 +466,7 @@ namespace Headstart.API.Commands
                 decimal lineItemTotal = 0;
                 if (li != null)
                 {
-                    if (product.Product.xp.ProductType == ProductType.Quote && li?.UnitPrice != null)
+                    if (product?.Product?.xp?.ProductType == ProductType.Quote && li?.UnitPrice != null)
                     {
                         return (decimal)li.UnitPrice;
                     }
