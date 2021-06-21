@@ -9,6 +9,7 @@ export class GeographyConfig {
       { label: 'Belgium', abbreviation: 'BE', currency: 'EUR' },
       { label: 'Canada', abbreviation: 'CA', currency: 'CAD' },
       { label: 'Cyprus', abbreviation: 'CY', currency: 'EUR' },
+      { label: 'Denmark', abbreviation: 'DK', currency: 'DKK' },
       { label: 'Estonia', abbreviation: 'EE', currency: 'EUR' },
       { label: 'Finland', abbreviation: 'FI', currency: 'EUR' },
       { label: 'France', abbreviation: 'FR', currency: 'EUR' },
