@@ -263,7 +263,15 @@
       *ngIf="isQuoteOrder(_order) && _order?.xp?.QuoteOrderInfo?.Comments"
       class="alert alert-secondary small mt-3"
     >
-      <strong>Comments: </strong> {{ _order.xp?.QuoteOrderInfo?.Comments }}
+      <strong>Buyer Comments: </strong>
+      {{ _order.xp?.QuoteOrderInfo?.Comments }}
+    </div>
+    <div
+      *ngIf="isQuoteOrder(_order) && _order.xp?.SellerQuoteComment"
+      class="alert alert-secondary small mt-1"
+    >
+      <strong>Seller Comments: </strong>
+      {{ _order.xp.SellerQuoteComment }}
     </div>
     <div
       *ngIf="!isQuoteOrder(_order) && _buyerOrder?.Comments"

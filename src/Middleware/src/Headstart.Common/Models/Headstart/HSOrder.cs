@@ -40,6 +40,9 @@ namespace Headstart.Models
         public List<ShipMethodSupplierView> SelectedShipMethodsSupplierView { get; set; }
         public bool? IsResubmitting { get; set; }
         public bool? HasSellerProducts { get; set; }
+        public bool? NeedsSellerAttention { get; set; }
+        public bool? NeedsBuyerAttention { get; set; }
+        public string SellerQuoteComment { get; set; }
     }
 
     [SwaggerModel]
