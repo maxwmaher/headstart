@@ -1,4 +1,3 @@
-import { LineItem } from './../../../../../../SDK/dist/models/LineItem.d';
 import { Component, OnInit } from '@angular/core'
 import { faCube, faTruck } from '@fortawesome/free-solid-svg-icons'
 import {
