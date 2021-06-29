@@ -103,7 +103,7 @@ namespace Headstart.Models
 	public enum ProductType
 	{
 		Standard,
-		Quote,
+		Quote
 	}
 
     [SwaggerModel]
