@@ -10,6 +10,7 @@ using Headstart.Common.Services.ShippingIntegration.Models;
 using ordercloud.integrations.cardconnect;
 using Headstart.API.Commands;
 using OrderCloud.Catalyst;
+using Headstart.Common.Models;
 
 namespace Headstart.Common.Controllers
 {
@@ -63,6 +64,13 @@ namespace Headstart.Common.Controllers
         public async Task<List<HSShipmentWithItems>> ListShipmentsWithItems(string orderID)
         {
             return await _command.ListHSShipmentWithItems(orderID, UserContext);
+        }
+
+        [DocName("LIST RMAs for Order, ensures user has access to location orders or created the order themselves")]
+        [HttpGet, Route("rma/list/{orderID}"), OrderCloudUserAuth(ApiRole.Shopper)]
+        public async Task<CosmosListPage<RMA>> ListRMAsForOrder(string orderID)
+        {
+            return await _command.ListRMAsForOrder(orderID, UserContext);
         }
 
         [DocName("Add or update a line item to an order")]
