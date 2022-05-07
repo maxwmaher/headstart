@@ -176,7 +176,7 @@ namespace Headstart.API
 			services
 				.AddCors(o => o.AddPolicy($@"integrationcors", builder => { builder.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader(); }))
 				.AddSingleton<ISimpleCache, LazyCacheService>() // Replace LazyCacheService with RedisService if you have multiple server instances.
-				.AddOrderCloudUserAuth(opts => opts.AddValidClientIDs(clientIds))
+				.AddOrderCloudUserAuth()
 				.AddOrderCloudWebhookAuth(opts => opts.HashKey = _settings.OrderCloudSettings.WebhookHashKey)
 				.InjectCosmosStore<LogQuery, OrchestrationLog>(cosmosConfig)
 				.InjectCosmosStore<ReportTemplateQuery, ReportTemplate>(cosmosConfig)

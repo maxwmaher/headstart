@@ -143,7 +143,7 @@ namespace Headstart.API.Commands
 				}
 				if (idInRequest == null || idInRequest.Length == 0)
 				{
-					resp = $@"{buyerId}-[{buyerId}-LocationIncrementor]";
+					resp = buyerId + "-{" + buyerId + "-LocationIncrementor}";
 				}
 				if (idInRequest.StartsWith($@"{buyerId}-"))
 				{
